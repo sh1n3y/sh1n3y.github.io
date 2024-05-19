@@ -1,7 +1,7 @@
 body {
     text-align: center;
     color: aliceblue;
-    
+    border: solid skyblue 3px;
 }
 
 * {
