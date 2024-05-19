@@ -1,0 +1,21 @@
+body {
+    background-color: rgb(38, 72, 99);
+    text-align: center;
+    color: aliceblue;
+}
+
+h1 {
+    background-color: slategray;
+    position: fixed;
+}
+
+p {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+}
+
+a {
+    font-size: larger;
+    font-style: italic;
+    
+}
