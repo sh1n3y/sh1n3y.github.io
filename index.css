@@ -1,13 +1,16 @@
 body {
-    background-color: rgb(38, 72, 99);
     text-align: center;
     color: aliceblue;
+    
+}
+
+* {
+    background-color: rgb(38, 72, 99);
 }
 
 h1 {
     background-color: slategray;
-    position: fixed;
-    text-align: center;
+    background-size: 100%;
 }
 
 p {
@@ -15,9 +18,9 @@ p {
     font-weight: bold;
 }
 
-div {
+a {
     font-size: larger;
     font-style: italic;
-    background-color: white;
+    color: aliceblue;
     
 }
