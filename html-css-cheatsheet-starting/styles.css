@@ -1,0 +1,19 @@
+img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+head {
+    color: blue;
+}
+
+body {
+    color:brown;
+}
+
+p {
+    text-align: center;
+
+}
+
