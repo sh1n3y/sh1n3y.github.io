@@ -1,0 +1,26 @@
+button {
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    box-shadow: 2px 5px;
+    font-size: xx-large;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    font-family: "Noto Sans TC", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: normal;
+    color: brown;
+    background-color: aliceblue;
+}
+
+* {
+    background-color: rgb(96, 178, 129);
+}
+
+#restart-button {
+    top: 50%
+}
+
