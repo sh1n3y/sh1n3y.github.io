@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="./index.css">
+        <title>WP YAO TON | 我要桐</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap" rel="stylesheet">
+        <audio id="clickSound" src="./resource/12.mp3"></audio>
+        <style>
+            body {
+                margin: 0;
+                overflow: hidden;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                background-color: #88ee9b;
+                flex-direction: column;
+            }
+            button {
+                padding: 5px;
+                border: none;
+                border-radius: 5px;
+                text-decoration: none;
+                box-shadow: 2px 5px;
+                font-size: xx-large;
+                position: absolute;
+                top: 30%;
+                left: 50%;
+                font-family: "Noto Sans TC", sans-serif;
+                font-optical-sizing: auto;
+                font-weight: 900;
+                font-style: normal;
+                color: brown;
+                background-color: aliceblue;
+                cursor: pointer;
+            }
+            #canvas {
+                display: none;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <canvas id="canvas"></canvas>
+        <button id="button">我要桐</button>
+
+        <div id="summary">
+            <p id="count-display">桐生:</p>
+            <button id="restart-button">選李白</button>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.17.1/matter.min.js"></script>
+        <script src="./script.js"></script>
+    </body>
+</html>
