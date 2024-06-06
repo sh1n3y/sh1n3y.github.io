@@ -1,0 +1,62 @@
+* {
+    background-color: rgb(188, 221, 250);
+}
+
+h1 {
+    text-align: center;
+    border-top: 10px;
+    background-color: white;
+
+}
+
+.shima {
+    background-color: rgb(70, 114, 189);
+    color: aliceblue;
+    border: 20px;
+    background-color: rgb(70, 114, 189);
+    display: block;
+    padding-right: 50px;
+    padding-left: 50px;
+    text-decoration: none;
+}
+
+ul {
+    display: flex;
+    list-style: none;
+    background-color: rgb(70, 114, 189);
+    
+}
+
+
+.ton {
+    background-color: rgb(70, 114, 189);
+    color: aliceblue;
+    background-color: rgb(70, 114, 189);
+    display: block;
+    padding-right: 50px;
+    padding-left: 50px;
+    text-decoration: none;
+}
+
+.ton:hover {
+    background-color: rgba(71, 161, 251, 0.379);
+    color: rgb(25, 122, 249);
+}
+
+.shima:hover {
+    background-color: rgba(71, 161, 251, 0.379);
+    color: rgb(25, 122, 249);
+}
+.daton:hover {
+    background-color: rgba(71, 161, 251, 0.379);
+    color: rgb(25, 122, 249);
+}
+.daton {
+    background-color: rgb(70, 114, 189);
+    color: aliceblue;
+    background-color: rgb(70, 114, 189);
+    display: block;
+    padding-right: 50px;
+    padding-left: 50px;
+    text-decoration: none;
+}
