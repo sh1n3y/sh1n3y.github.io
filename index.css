@@ -60,3 +60,17 @@ ul {
     padding-left: 50px;
     text-decoration: none;
 }
+
+.tonson:hover {
+    background-color: rgba(71, 161, 251, 0.379);
+    color: rgb(25, 122, 249);
+}
+.tonson {
+    background-color: rgb(70, 114, 189);
+    color: aliceblue;
+    background-color: rgb(70, 114, 189);
+    display: block;
+    padding-right: 50px;
+    padding-left: 50px;
+    text-decoration: none;
+}
