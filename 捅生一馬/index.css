@@ -2,4 +2,5 @@ body {
     cursor:url(img/majima.ico), auto;
     cursor:url(img/majima.ico),-moz-zoom-out;
     cursor:url(img/majima.ico),pointer;
+    user-select: none;//取消选中
 }
