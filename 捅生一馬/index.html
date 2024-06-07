@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -189,18 +188,19 @@
             }
         }
 
-        function mouse_show(){
-            //生成随机的数组下标
-            var i = parseInt(Math.random()*imgs.length);
-            //随机改变图片
-            var imgSrc = Math.random() < 0.5 ? "img/01.jpg" : "img/31.jpg";
-            imgs[i].src = imgSrc;
+        function mouse_show() {
+    //生成随机的数组下标
+    var i = parseInt(Math.random() * imgs.length);
+    //随机改变图片
+    var imgSrc = Math.random() < 0.5 ? "img/01.jpg" : "img/31.jpg"; // 将 imgSrc 设为可能的01或31
+    imgs[i].src = imgSrc;
 
-            //地鼠出现间隔
-            jg_id = setTimeout("mouse_show()", jg_time*1000);
-            //地鼠停留时间
-            tl_id = setTimeout("mouse_hide("+i+")", tl_time*1000);
-        }
+    //地鼠出现间隔
+    jg_id = setTimeout("mouse_show()", jg_time * 1000);
+    //地鼠停留时间
+    tl_id = setTimeout("mouse_hide(" + i + ")", tl_time * 1000);
+}
+
 
         //地鼠消失，没打中
         function mouse_hide(i){
@@ -219,39 +219,42 @@
             }
         }
 
-
-        function play(obj){
+function play(obj) {
     //获取图片的名称
-    var name = obj.src.substr(obj.src.length-5, 1);
+    var name = obj.src.substr(obj.src.length - 5, 2);
 
-    if(name == '1'){
+    if (name == '01') {
         obj.src = "img/02.jpg";
 
-        // 播放擊中音效
+        // 播放击中音效
+        hitSound.pause();
+        hitSound.currentTime = 0; // 重置音效播放位置
         hitSound.play();
 
         //计分
         dz++;
-        df+=2;
-        df_span.innerHTML = "捅中"+dz+"隻，得分"+df;
+        df += 2;
+        df_span.innerHTML = "捅中" + dz + "隻，得分" + df;
 
         //打中后还原
-        play_id = setTimeout(function(){
+        play_id = setTimeout(function() {
             obj.src = "img/00.jpg";
         }, 500);
-    } else if(name == '3') {
+    } else if (name == '31') {
         obj.src = "img/00.jpg";
 
         // 播放漏打音效
+        missSound.pause();
+        missSound.currentTime = 0; // 重置音效播放位置
         missSound.play();
 
         //扣分
         ld++;
         df--;
-        if(df<=0){
+        if (df <= 0) {
             df = 0;
         }
-        df_span.innerHTML = "捅中"+dz+"隻，得分"+df;
+        df_span.innerHTML = "捅中" + dz + "隻，得分" + df;
     }
 }
 
@@ -330,6 +333,3 @@
         <span id="str"></span>
     </body>
 </html>
-
-
-
