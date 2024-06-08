@@ -1,333 +1,55 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>捅生一馬</title>
-    <link rel="stylesheet" href="index.css">
-    <audio id="hitSound" src="sound/hit.mp3"></audio>
-    <audio id="missSound" src="sound/miss.mp3"></audio>
-    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <style>
-        #game_div {
-            position: absolute;
-        }
-        #zt_div {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0px;
-            left: 0px;
-            background-color: #eeeeee;
-            z-index: 100;
-            opacity: 0.6;
-            display: none;
-        }
-    </style>
-
-    <script>
-        var tl, jg, sc, djs_span, df_span, ksBtn, ztBtn, tzBtn;
-        var imgs;
-        var djs_id, jg_id, tl_id, play_id;
-        var isStart; //判断是否开始，游戏开始为true，游戏暂停为false
-        var isZT = false; //是否为暂停
-        var djs_data; //倒计时的时间
-        var jxGame_sc; //继续游戏的总时长
-        var isOneStart = true; //判断是否为第一次开始
-        var dz = 0, ld = 0, df = 0; //游戏计分
-        var hitSound, missSound;
-
-        window.onload = function() {
-            //获取HTML元素
-            tl = document.getElementById("tl");
-            jg = document.getElementById("jg");
-            sc = document.getElementById("sc");
-            djs_span = document.getElementById("djs");
-            df_span = document.getElementById("defen");
-            ksBtn = document.getElementById("ksBtn");
-            ztBtn = document.getElementById("ztBtn");
-            tzBtn = document.getElementById("tzBtn");
-            imgs = document.images;
-            zt_div = document.getElementById("zt_div");
-            // 获取音效元素
-            hitSound = document.getElementById("hitSound");
-            missSound = document.getElementById("missSound");
-
-            //游戏开始事件
-            ksBtn.onclick = function() {
-                tl_time = parseInt(tl.value); //停留时间
-                jg_time = parseInt(jg.value); //间隔时间
-                sc_time = parseInt(sc.value); //游戏时长
-
-                //设置第一次开始游戏
-                isOneStart = true;
-
-                //记录游戏开始时间
-                start_Time = new Date();
-
-                //执行倒计时方法
-                djs();
-                //执行地鼠出现的方法
-                mouse_show();
-
-                //禁止用户操作输入框
-                isStart = true;
-                jinzhi();
-            }
-
-            //游戏暂停事件
-            ztBtn.onclick = function() {
-                if (isZT) {
-                    //继续游戏
-                    isOneStart = false;
-                    zt_div.style.display = "none";
-                    ztBtn.textContent = "暫停";
-                    isZT = false;
-
-                    //继续游戏开始的时间
-                    jxGame_startTime = new Date();
-                    game_jx();
-                    //执行地鼠出现的方法
-                    qingchang();
-                    mouse_show();
-
-                    //禁止用户操作输入框
-                    jinzhi();
-                } else {
-                    //暂停游戏
-                    game_zt();
-                }
-            }
-
-            //游戏结束事件
-            tzBtn.onclick = function() {
-                game_over();
-                jinzhi();
-            }
-        }
-
-        //倒计时方法
-        function djs() {
-            //实时记录游戏时间
-            var game_time = new Date();
-            //计算倒计时
-            djs_data = sc_time * 60 - parseInt((game_time - start_Time) / 1000);
-
-            //显示倒计时
-            djs_span.innerHTML = djs_data;
-
-            if (djs_data < 1) {
-                alert("遊戲結束");
-                game_over();
-                return;
-            }
-
-            //倒计时的计时器
-            djs_id = setTimeout(djs, 1000);
-        }
-
-        //游戏暂停方法
-        function game_zt() {
-            clearTimeout(djs_id);
-            clearTimeout(jg_id);
-            clearTimeout(tl_id);
-            if (!isOneStart) {
-                clearTimeout(jxDJS_id);
-            }
-            zt_div.style.display = "block";
-            ztBtn.textContent = "繼續捅";
-            isZT = true;
-
-            //获取倒计时，作为继续游戏的总时长
-            jxGame_sc = djs_data;
-        }
-
-        //游戏继续方法
-        function game_jx() {
-            //继续游戏进行时
-            var jxGame_timming = new Date();
-
-            //重新计算倒计时
-            djs_data = jxGame_sc - parseInt((jxGame_timming - jxGame_startTime) / 1000);
-            djs_span.innerHTML = djs_data;
-
-            if (djs_data < 1) {
-                alert("遊戲結束");
-                game_over();
-                return;
-            }
-
-            jxDJS_id = setTimeout(game_jx, 1000);
-        }
-
-        //游戏结束
-        function game_over() {
-            clearTimeout(tl_id);
-            clearTimeout(jg_id);
-            clearTimeout(djs_id);
-            clearTimeout(play_id);
-            if (!isOneStart) {
-                clearTimeout(jxDJS_id);
-            }
-            isStart = false;
-            djs_span.innerHTML = 0;
-
-            //恢复游戏场地
-            zt_div.style.display = "none";
-
-            //地鼠清场
-            qingchang();
-        }
-
-        //地鼠清场
-        function qingchang() {
-            for (var i = 0; i < imgs.length; i++) {
-                imgs[i].src = "img/00.jpg";
-            }
-        }
-
-        function mouse_show() {
-            //生成随机的数组下标
-            var i = parseInt(Math.random() * imgs.length);
-            //随机改变图片
-            var imgSrc = Math.random() < 0.5 ? "img/01.jpg" : "img/31.jpg"; // 将 imgSrc 设为可能的01或31
-            imgs[i].src = imgSrc;
-
-            //地鼠出现间隔
-            jg_id = setTimeout(mouse_show, jg_time * 1000);
-            //地鼠停留时间
-            tl_id = setTimeout(function() { mouse_hide(i); }, tl_time * 1000);
-        }
-
-        //地鼠消失，没打中
-        function mouse_hide(i) {
-    var name = imgs[i].src.substr(imgs[i].src.length - 6, 2); // 修改获取图片名称的长度
-
-    if (name == '01' || name == '31') { // 修改条件以处理31.jpg
-        imgs[i].src = "img/00.jpg";
-
-        // 计分
-        if (name == '01') {
-            ld++;
-            df--;
-            if (df <= 0) {
-                df = 0;
-            }
-            df_span.innerHTML = "捅中" + dz + "隻，得分" + df;
-        }
-    }
+body {
+    cursor:url(img/majima.ico), auto;
+    cursor:url(img/majima.ico),-moz-zoom-out;
+    cursor:url(img/majima.ico),pointer;
+    text-align: center;
+    background-color: rgb(217, 232, 245);
+    
 }
 
-        function play(obj) {
-            //获取图片的名称
-            var name = obj.src.substr(obj.src.length - 6, 2); // 修改获取图片名称的长度
+#game_div {
+    align-items: center;
+}
 
-            if (name == '01') {
-                obj.src = "img/02.jpg";
+.btn {
+    min-width: 20px;
+    border: none;
+    border-radius: 5px;
+    background: #ffffff;
+    color: #666666;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    box-shadow: 0 6px 6px #06f;
+    padding: 10px 20px;
+}
+.btn:active {
+    background: #ff8888;
+    color: #ffffff;
+    box-shadow: none;
+    animation: anim 100ms;
+}
+@keyframes anim {
+    0% { background: radial-gradient(circle at center, rgba( 255, 125 , 125, 0 ) 0%, #ffffff 0%, #ffffff 100%); }
+    25% { background: radial-gradient(circle at center, rgba( 255, 125, 125, 0.3 ) 24%, #ffffff 25%, #ffffff 100%); }
+    50% { background: radial-gradient(circle at center, rgba( 255, 125, 125, 0.5 ) 49%, #ffffff 50%, #ffffff 100%); }
+    75% { background: radial-gradient(circle at center, rgba( 255, 125, 125, 0.8 ) 74%, #ffffff 75%, #ffffff 100%); }
+    100% { background: radial-gradient(circle at center, #ff8888 99%, #ffffff 100%, #ffffff 100%); color: #ffffff; }
+}
 
-                // 播放击中音效
-                hitSound.pause();
-                hitSound.currentTime = 0; // 重置音效播放位置
-                hitSound.play();
+input {
+    border: none;
+    border-radius: 5px;
 
-                //计分
-                dz++;
-                df += 2;
-                df_span.innerHTML = "捅中" + dz + "隻，得分" + df;
+}
 
-                //打中后还原
-                play_id = setTimeout(function() {
-                    obj.src = "img/00.jpg";
-                }, 500);
-            } else if (name == '31') {
-                obj.src = "img/00.jpg";
+span {
+    background-color: #ffffff;
+    border-radius: 5px;
+}
 
-                // 播放漏打音效
-                missSound.pause();
-                missSound.currentTime = 0; // 重置音效播放位置
-                missSound.play();
-
-                //扣分
-                ld++;
-                df--;
-                if (df <= 0) {
-                    df = 0;
-                }
-                df_span.innerHTML = "捅中" + dz + "隻，得分" + df;
-            }
-        }
-
-        //禁止用户操作方法
-        function jinzhi() {
-            if (isStart) {
-                tl.disabled = true;
-                jg.disabled = true;
-                sc.disabled = true;
-                ksBtn.disabled = true;
-            } else {
-                tl.disabled = false;
-                jg.disabled = false;
-                sc.disabled = false;
-                ksBtn.disabled = false;
-            }
-        }
-    </script>
-</head>
-<body>
-    <div id="ki">
-    桐生停留時間：<input id="tl" type="text" size="2" value="1" />秒<br />
-    桐生出現間隔：<input id="jg" type="text" size="2" value="1" />秒<br />
-    遊戲時間：<input id="sc" type="text" size="2px" value="1" />分鐘<br />
-    倒計時：<span id="djs"></span>秒<br />
-    總得分：<span id="defen"></span><br />
-
-    <button id="ksBtn" href="javascript: void(0)" class="btn">開始捅</button>
-    <button id="ztBtn" href="javascript: void(0)" class="btn">暫停捅</button>
-    <button id="tzBtn" href="javascript: void(0)" class="btn">停止捅</button>
-    </div>   
-
-    <hr />
-    <!--游戏区域-->
-    <div id="game_div" style="text-align: center;">
-        <div id="zt_div"></div>
-        <table border="5px" >
-            <tr>
-                <td><img src="img/00.jpg" onclick="play(this)" /></td>
-                <td><img src="img/00.jpg" onclick="play(this)" /></td>
-                <td><img src="img/00.jpg" onclick="play(this)" /></td>
-                <td><img src="img/00.jpg" onclick="play(this)" /></td>
-                <td><img src="img/00.jpg" onclick="play(this)" /></td>
-            </tr>
-            <tr>
-                <td><img src="img/00.jpg" onclick="play(this)" /></td>
-                <td><img src="img/00.jpg" onclick="play(this)" /></td>
-                <td><img src="img/00.jpg" onclick="play(this)" /></td>
-                <td><img src="img/00.jpg" onclick="play(this)" /></td>
-                <td><img src="img/00.jpg" onclick="play(this)" /></td>
-            </tr>
-            <tr>
-                <td><img src="img/00.jpg" onclick="play(this)" /></td>
-                <td><img src="img/00.jpg" onclick="play(this)" /></td>
-                <td><img src="img/00.jpg" onclick="play(this)" /></td>
-                <td><img src="img/00.jpg" onclick="play(this)" /></td>
-                <td><img src="img/00.jpg" onclick="play(this)" /></td>
-            </tr>
-            <tr>
-                <td><img src="img/00.jpg" onclick="play(this)" /></td>
-                <td><img src="img/00.jpg" onclick="play(this)" /></td>
-                <td><img src="img/00.jpg" onclick="play(this)" /></td>
-                <td><img src="img/00.jpg" onclick="play(this)" /></td>
-                <td><img src="img/00.jpg" onclick="play(this)" /></td>
-            </tr>
-            <tr>
-                <td><img src="img/00.jpg" onclick="play(this)" /></td>
-                <td><img src="img/00.jpg" onclick="play(this)" /></td>
-                <td><img src="img/00.jpg" onclick="play(this)" /></td>
-                <td><img src="img/00.jpg" onclick="play(this)" /></td>
-                <td><img src="img/00.jpg" onclick="play(this)" /></td>
-            </tr>
-        </table>
-    </div>
-
-    <span id="str"></span>
-</body>
-</html>
+#ki {
+    
+}
