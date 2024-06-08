@@ -7,10 +7,6 @@ body {
     
 }
 
-#game_div {
-    align-items: center;
-}
-
 .btn {
     min-width: 20px;
     border: none;
@@ -50,6 +46,10 @@ span {
     border-radius: 5px;
 }
 
-#ki {
-    
+#game_div {
+    text-align: center;
+}
+
+#game_div table {
+    margin: 0 auto;
 }
