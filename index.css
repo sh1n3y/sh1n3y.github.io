@@ -10,17 +10,6 @@ h1 {
 
 }
 
-.shima {
-    background-color: rgb(70, 114, 189);
-    color: aliceblue;
-    border: 20px;
-    background-color: rgb(70, 114, 189);
-    display: block;
-    padding-right: 50px;
-    padding-left: 50px;
-    text-decoration: none;
-}
-
 ul {
     display: flex;
     list-style: none;
@@ -29,26 +18,6 @@ ul {
     
 }
 
-
-.ton {
-    background-color: rgb(70, 114, 189);
-    color: aliceblue;
-    background-color: rgb(70, 114, 189);
-    display: block;
-    padding-right: 50px;
-    padding-left: 50px;
-    text-decoration: none;
-}
-
-.ton:hover {
-    background-color: rgba(71, 161, 251, 0.379);
-    color: rgb(25, 122, 249);
-}
-
-.shima:hover {
-    background-color: rgba(71, 161, 251, 0.379);
-    color: rgb(25, 122, 249);
-}
 .daton:hover {
     background-color: rgba(71, 161, 251, 0.379);
     color: rgb(25, 122, 249);
