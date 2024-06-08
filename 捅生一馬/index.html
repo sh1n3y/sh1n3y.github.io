@@ -8,9 +8,6 @@
     <audio id="missSound" src="sound/miss.mp3"></audio>
     <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <style>
-        #game_div {
-            position: absolute;
-        }
         #zt_div {
             position: absolute;
             width: 100%;
@@ -22,6 +19,12 @@
             opacity: 0.6;
             display: none;
         }
+
+        /* 將整個表格包含圖片水平置中 */
+        table {
+            margin: 0 auto;
+        }
+
     </style>
 
     <script>
@@ -273,7 +276,7 @@
     </script>
 </head>
 <body>
-    <div id="ki">
+    <div>
     桐生停留時間：<input id="tl" type="text" size="2" value="1" />秒<br />
     桐生出現間隔：<input id="jg" type="text" size="2" value="1" />秒<br />
     遊戲時間：<input id="sc" type="text" size="2px" value="1" />分鐘<br />
