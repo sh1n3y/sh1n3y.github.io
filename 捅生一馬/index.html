@@ -273,21 +273,23 @@
     </script>
 </head>
 <body>
-    桐生停留時間：<input id="tl" type="text" size="5" value="1" />秒<br />
-    桐生出現間隔：<input id="jg" type="text" size="5" value="1" />秒<br />
-    遊戲時間：<input id="sc" type="text" size="5px" value="1" />分鐘<br />
+    <div id="ki">
+    桐生停留時間：<input id="tl" type="text" size="2" value="1" />秒<br />
+    桐生出現間隔：<input id="jg" type="text" size="2" value="1" />秒<br />
+    遊戲時間：<input id="sc" type="text" size="2px" value="1" />分鐘<br />
     倒計時：<span id="djs"></span>秒<br />
     總得分：<span id="defen"></span><br />
 
-    <button id="ksBtn">開始捅</button>
-    <button id="ztBtn">暫停捅</button>
-    <button id="tzBtn">停止捅</button>
+    <button id="ksBtn" href="javascript: void(0)" class="btn">開始捅</button>
+    <button id="ztBtn" href="javascript: void(0)" class="btn">暫停捅</button>
+    <button id="tzBtn" href="javascript: void(0)" class="btn">停止捅</button>
+    </div>   
 
     <hr />
     <!--游戏区域-->
-    <div id="game_div">
+    <div id="game_div" style="text-align: center;">
         <div id="zt_div"></div>
-        <table border="1px">
+        <table border="5px" >
             <tr>
                 <td><img src="img/00.jpg" onclick="play(this)" /></td>
                 <td><img src="img/00.jpg" onclick="play(this)" /></td>
