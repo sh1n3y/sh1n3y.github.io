@@ -1,25 +1,123 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>洗內的東西</title>
-        <link rel="stylesheet" href="./index.css">
-        <link rel="icon" href="./logo2.ico" type="image/x-icon"/>
-    </head>
-    <body>
-        <div>
-            <h1>垃圾東西</h1>
-            <ul>
-                <li><a class="shima" href="./wo yao dao/index.html" title="你要什麼？">這是島</a></li>
-                <li><a class="ton" href="./wo yao ton/index.html" title="你要什麼？">這是桐</a></li>
-                <li><a class="daton" href="./hhh-main/index.html" title="你要什麼？">這是大桐</a></li>
-        </div>  
-        <!--載入-->      
-        <div class="skeleton3">
-            <div class="skeleton3_img"></div>
-            <div class="skeleton3_title"></div>
-            <div class="skeleton3_text"></div>
-            <div class="skeleton3_desc"></div>
-            <div class="skeleton3_desc2"></div>
-        </div>
-    </body>
-</html>
+* {
+    background-color: rgb(188, 221, 250);
+}
+
+h1 {
+    text-align: center;
+    border-top: 10px;
+    background-color: white;
+    width: 100%;
+
+}
+
+.shima {
+    background-color: rgb(70, 114, 189);
+    color: aliceblue;
+    border: 20px;
+    background-color: rgb(70, 114, 189);
+    display: block;
+    padding-right: 50px;
+    padding-left: 50px;
+    text-decoration: none;
+}
+
+ul {
+    display: flex;
+    list-style: none;
+    background-color: rgb(70, 114, 189);
+    width: 100%;
+    
+}
+
+
+.ton {
+    background-color: rgb(70, 114, 189);
+    color: aliceblue;
+    background-color: rgb(70, 114, 189);
+    display: block;
+    padding-right: 50px;
+    padding-left: 50px;
+    text-decoration: none;
+}
+
+.ton:hover {
+    background-color: rgba(71, 161, 251, 0.379);
+    color: rgb(25, 122, 249);
+}
+
+.shima:hover {
+    background-color: rgba(71, 161, 251, 0.379);
+    color: rgb(25, 122, 249);
+}
+.daton:hover {
+    background-color: rgba(71, 161, 251, 0.379);
+    color: rgb(25, 122, 249);
+}
+.daton {
+    background-color: rgb(70, 114, 189);
+    color: aliceblue;
+    background-color: rgb(70, 114, 189);
+    display: block;
+    padding-right: 50px;
+    padding-left: 50px;
+    text-decoration: none;
+}
+
+.skeleton3{
+    max-width: 100%;
+    height: 275px;
+    border-radius: 6px;
+    box-shadow: 0 10px 45 px rgba(0,0,0, .1);
+    padding: 15px;
+    border: 1px solid cadetblue;
+    position: relative;
+}
+.skeleton3_img{
+    background: #ececec;
+    width: 100%;
+    height: 150px;
+}
+.skeleton3_title{
+    background: #ececec;
+    width:50%;
+    margin-top: 16px;
+    height:20px;
+}
+.skeleton3_text{
+    background: #ececec;
+    width:100%;
+    margin-top: 16px;
+    height: 16px;
+}
+.skeleton3_desc{
+    background: #ececec;
+    width: 80%;
+    margin-top: 8px;
+    height: 14px;
+}
+.skeleton3_desc2{
+    background: #ececec;
+    width: 70%;
+    margin-top: 8px;
+    height: 14px;
+}
+.skeleton3::before{
+    width: 100%;
+    content: "";
+    position: absolute;
+    height: 100%;
+    z-index: 1;
+    background-image: linear-gradient(90deg, rgba(255,255,255, 0) ,rgba(255,255,255, .8) 50%, rgba(255,255,255, 0) 100%);
+    background-position: -400px 0;
+    background-repeat: no-repeat;
+    animation: loading2 1.5s infinite;
+    left: 0;
+    top: 0;
+}
+
+@keyframes loading2{
+   to {
+    background-position: 
+        400px 0;
+   } 
+}
