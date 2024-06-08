@@ -34,6 +34,7 @@
         var jxGame_sc; //继续游戏的总时长
         var isOneStart = true; //判断是否为第一次开始
         var dz = 0, ld = 0, df = 0; //游戏计分
+        var hitSound, missSound;
 
         window.onload = function(){
             //获取HTML元素
@@ -47,8 +48,7 @@
             tzBtn = document.getElementById("tzBtn");
             imgs = document.images;
             zt_div = document.getElementById("zt_div");
-
-             // 获取音效元素
+            // 获取音效元素
             hitSound = document.getElementById("hitSound");
             missSound = document.getElementById("missSound");
 
