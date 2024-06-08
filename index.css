@@ -1,76 +1,25 @@
-* {
-    background-color: rgb(188, 221, 250);
-}
-
-h1 {
-    text-align: center;
-    border-top: 10px;
-    background-color: white;
-
-}
-
-.shima {
-    background-color: rgb(70, 114, 189);
-    color: aliceblue;
-    border: 20px;
-    background-color: rgb(70, 114, 189);
-    display: block;
-    padding-right: 50px;
-    padding-left: 50px;
-    text-decoration: none;
-}
-
-ul {
-    display: flex;
-    list-style: none;
-    background-color: rgb(70, 114, 189);
-    
-}
-
-
-.ton {
-    background-color: rgb(70, 114, 189);
-    color: aliceblue;
-    background-color: rgb(70, 114, 189);
-    display: block;
-    padding-right: 50px;
-    padding-left: 50px;
-    text-decoration: none;
-}
-
-.ton:hover {
-    background-color: rgba(71, 161, 251, 0.379);
-    color: rgb(25, 122, 249);
-}
-
-.shima:hover {
-    background-color: rgba(71, 161, 251, 0.379);
-    color: rgb(25, 122, 249);
-}
-.daton:hover {
-    background-color: rgba(71, 161, 251, 0.379);
-    color: rgb(25, 122, 249);
-}
-.daton {
-    background-color: rgb(70, 114, 189);
-    color: aliceblue;
-    background-color: rgb(70, 114, 189);
-    display: block;
-    padding-right: 50px;
-    padding-left: 50px;
-    text-decoration: none;
-}
-
-.tonson:hover {
-    background-color: rgba(71, 161, 251, 0.379);
-    color: rgb(25, 122, 249);
-}
-.tonson {
-    background-color: rgb(70, 114, 189);
-    color: aliceblue;
-    background-color: rgb(70, 114, 189);
-    display: block;
-    padding-right: 50px;
-    padding-left: 50px;
-    text-decoration: none;
-}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>洗內的東西</title>
+        <link rel="stylesheet" href="./index.css">
+        <link rel="icon" href="./logo2.ico" type="image/x-icon"/>
+    </head>
+    <body>
+        <div>
+            <h1>垃圾東西</h1>
+            <ul>
+                <li><a class="shima" href="./wo yao dao/index.html" title="你要什麼？">這是島</a></li>
+                <li><a class="ton" href="./wo yao ton/index.html" title="你要什麼？">這是桐</a></li>
+                <li><a class="daton" href="./hhh-main/index.html" title="你要什麼？">這是大桐</a></li>
+        </div>  
+        <!--載入-->      
+        <div class="skeleton3">
+            <div class="skeleton3_img"></div>
+            <div class="skeleton3_title"></div>
+            <div class="skeleton3_text"></div>
+            <div class="skeleton3_desc"></div>
+            <div class="skeleton3_desc2"></div>
+        </div>
+    </body>
+</html>
