@@ -55,6 +55,20 @@ const view = {
   }
 }
 
+const soundEffects = [
+  new Audio('sound/hitsound1.mp3'),
+  new Audio('sound/hitsound2.mp3'),
+  new Audio('sound/hitsound3.mp3'),
+  new Audio('sound/hitsound4.mp3'),
+  new Audio('sound/hitsound5.mp3'),
+  new Audio('sound/hitsound6.mp3')
+];
+
+function playRandomHitSound() {
+  const randomIndex = Math.floor(Math.random() * soundEffects.length);
+  soundEffects[randomIndex].play();
+}
+
 const controller = {
   displayGame() {
     model.initiGame()
@@ -83,12 +97,6 @@ const controller = {
   },
   rush(event) {
     switch (event.keyCode) {
-      // case 37:
-      //   controller.moveLeft()
-      //   break;
-      // case 39:
-      //   controller.moveRight()
-      //   break;
       case 40:
         controller.moveDown()
         break;
@@ -108,6 +116,7 @@ const controller = {
       view.checkAndRemoveGrids()
       view.draw()
       model.addScore()
+      playRandomHitSound(); // 播放隨機音效
       this.gameOver()
     }
   },
@@ -143,11 +152,9 @@ const controller = {
     const squares = model.squares
     const currentPosition = model.currentPosition
     const nextRotation = model.currentRotation + 1 === model.currentTetromino.length ? 0 : model.currentRotation + 1
-    // 下一個旋轉位置
     const nextTetromino = model.createTetromino(nextRotation)
     const nextIsAtLeftEdge = nextTetromino.some(index => (currentPosition + index) % width === 0)
     const nextIsAtRightEdge = nextTetromino.some(index => (currentPosition + index) % width === width - 1)
-    // 目前位置
     const current = model.currentTetromino
     const isAtLeftEdge = current.some(index => (currentPosition + index) % width === 0)
     const isAtRightEdge = current.some(index => (currentPosition + index) % width === width - 1 || (currentPosition + index) % width === width - 2)
@@ -158,7 +165,6 @@ const controller = {
     } else {
       view.undraw()
       if (nextIsAtLeftEdge & isAtRightEdge) {        
-        // 另一種想法，如果有兩格跑到另一側，那就退後兩格
         model.currentPosition -= backWard.length
       } else if (nextIsAtRightEdge & isAtLeftEdge) {
         model.currentPosition++
@@ -377,5 +383,7 @@ const utility = {
     })
   }
 }
+
+
 
 controller.displayGame()
