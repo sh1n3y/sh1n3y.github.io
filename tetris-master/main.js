@@ -56,12 +56,12 @@ const view = {
 }
 
 const soundEffects = [
-  new Audio('sound/hitsound1.mp3'),
-  new Audio('sound/hitsound2.mp3'),
-  new Audio('sound/hitsound3.mp3'),
-  new Audio('sound/hitsound4.mp3'),
-  new Audio('sound/hitsound5.mp3'),
-  new Audio('sound/hitsound6.mp3')
+  new Audio('./sound/hitsound1.mp3'),
+  new Audio('./sound/hitsound2.mp3'),
+  new Audio('./sound/hitsound3.mp3'),
+  new Audio('./sound/hitsound4.mp3'),
+  new Audio('./sound/hitsound5.mp3'),
+  new Audio('./sound/hitsound6.mp3')
 ];
 
 function playRandomHitSound() {
