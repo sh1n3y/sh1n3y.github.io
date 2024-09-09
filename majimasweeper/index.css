@@ -7,11 +7,7 @@ body {
 .settings {
     margin-bottom: 20px;
 }
-.btn {
-    font-size: medium;
-    width: 100px;
-    height: 40px;
-}
+
 .levels {
     font-size: medium;
     width: 100px;
@@ -49,8 +45,9 @@ body {
 }
 .main {
     display: inline-block;
-    background-color: #c0c0c0;
+    background-color: #f0f0f0;
     padding: 25px;
+    transition: box-shadow 0.3s;
 }
 .title {
     display: flex;
@@ -100,6 +97,7 @@ body {
         background-color: #848639;
         padding: 25px;
         overflow: auto  !important;
+        
     }
     .board-simple {
         display: inline-block;
