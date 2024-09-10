@@ -1,6 +1,3 @@
-jekyll serve --watch
-
-
 * {
     background-color: rgb(188, 221, 250);
 }
@@ -92,4 +89,28 @@ ul {
     background-position: 
         400px 0;
    } 
+}
+
+.tranding-slide .tranding-slide-img img {
+    width: 37rem;
+    height: 42rem;
+    border-radius: 2rem;
+    object-fit: cover;
+}
+
+.swiper-slide-shadow-left,
+.swiper-slide-shadow-right {
+    display: none;
+}
+
+.networks {
+    text-align: center;
+    width: 100%;
+    height: 3rem;
+}
+
+i :hover {
+    cursor: pointer;
+    transition: 1s;
+    color: #fff;
 }
