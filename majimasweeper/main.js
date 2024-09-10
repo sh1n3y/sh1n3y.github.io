@@ -19,6 +19,9 @@ new Vue({
     mounted() {
         this.startGame()
     },
+
+
+    
     methods: {
         suitMobile() {
             // 兼容手机平板
@@ -140,7 +143,6 @@ new Vue({
                         this.wrongIndex = [row, col]
                         this.showDetail();
                         clearInterval(this.timecount)  // 停止计时
-                        alert('Game Over!');
                         this.gameOn = false;
                     } else if (cell.adjacentMines === 0) {
                         this.revealAdjacentCells(row, col);
@@ -214,6 +216,7 @@ new Vue({
                 result = _num;
             }
             return result;
-        }
+        },
+        
     }
 });
