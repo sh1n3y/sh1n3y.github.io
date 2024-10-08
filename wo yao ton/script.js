@@ -7,6 +7,7 @@ document.getElementById('button').addEventListener('click', () => {
 document.getElementById('restart-button').addEventListener('click', () => {
     document.getElementById('summary').style.display = 'none';
     document.getElementById('canvas').style.display = 'block';
+    count = 0; // 重置計數器
     startPhysics(); // 開始物理模擬
 });
 
@@ -64,107 +65,113 @@ function startPhysics() {
     // 創建邊界牆
     const leftWall = Bodies.rectangle(bounceZoneX, bounceZoneY + bounceZoneHeight / 2, 10, bounceZoneHeight, { isStatic: true });
     const rightWall = Bodies.rectangle(bounceZoneX + bounceZoneWidth, bounceZoneY + bounceZoneHeight / 2, 10, bounceZoneHeight, { isStatic: true });
-    const topWall = Bodies.rectangle(bounceZoneX + bounceZoneWidth / 2, bounceZoneY, bounceZoneWidth, 10, { isStatic: true });
-    const bottomWall = Bodies.rectangle(bounceZoneX + bounceZoneWidth / 2, bounceZoneY + bounceZoneHeight, bounceZoneWidth, 10, { isStatic: true });
+    
+	// 設置上牆和下牆
+	const topWall = Bodies.rectangle(bounceZoneX + bounceZoneWidth / 2, bounceZoneY, bounceZoneWidth, 10, { isStatic: true });
+	const bottomWall = Bodies.rectangle(bounceZoneX + bounceZoneWidth / 2, bounceZoneY + bounceZoneHeight, bounceZoneWidth, 10, { isStatic: true });
 
-    World.add(world, [leftWall, rightWall, topWall, bottomWall]);
+	World.add(world, [leftWall, rightWall, topWall, bottomWall]);
 
-    // 隨機選擇一張圖片
-    const randomImage = images[Math.floor(Math.random() * images.length)];
+	// 隨機選擇一張圖片並確保其生成在綠色區域內
+	const randomImage = images[Math.floor(Math.random() * images.length)];
 
-    // 創建圓形圖片物體
-    const circleSize = 80;
-    const initialScale = 0.2;
-    const density = 0.001;
-    const airFriction = 0.05;
-    const restitution = 0.8;
+	// 創建圓形圖片物體
+	const circleSize = 80;
+	const initialScale = 0.2;
+	const density = 0.001;
+	const airFriction = 0.05;
+	const restitution = 0.8; // 確保有彈性
 
-    const circle = Bodies.circle(bounceZoneX + bounceZoneWidth * Math.random(), bounceZoneY + bounceZoneHeight * Math.random(), circleSize / 2, {
-        label: 'image',
-        density: density,
-        frictionAir: airFriction,
-        restitution: restitution,
-        render: {
-            sprite: {
-                texture: randomImage,
-                xScale: initialScale,
-                yScale: initialScale
-            }
-        }
-    });
+	const circleX = Math.random() * (bounceZoneWidth - circleSize) + (bounceZoneX + circleSize / 2);
+	const circleY = Math.random() * (bounceZoneHeight - circleSize) + (bounceZoneY + circleSize / 2);
 
-    World.add(world, [circle]);
+	const circle = Bodies.circle(circleX, circleY, circleSize / 2, {
+		label: 'image',
+		density: density,
+		frictionAir: airFriction,
+		restitution: restitution,
+		render: {
+			sprite: {
+				texture: randomImage,
+				xScale: initialScale,
+				yScale: initialScale
+			}
+		}
+	});
 
-    // 創建渲染器
-    const render = Render.create({
-        element: document.body,
-        canvas: document.getElementById('canvas'),
-        engine: engine,
-        options: {
-            width: window.innerWidth,
-            height: window.innerHeight,
-            wireframes: false,
-            background: '#88ee9b'
-        }
-    });
+	World.add(world, [circle]);
 
-    Render.run(render);
-    Runner.run(Runner.create(), engine);
+	// 創建渲染器
+	const render = Render.create({
+		element: document.body,
+		canvas: document.getElementById('canvas'),
+		engine: engine,
+		options: {
+			width: window.innerWidth,
+			height: window.innerHeight,
+			wireframes: false,
+			background: '#88ee9b'
+		}
+	});
 
-    // 添加鼠標控制
-    const mouse = Mouse.create(render.canvas);
-    const mouseConstraint = MouseConstraint.create(engine, {
-        mouse: mouse,
-        constraint: {
-            stiffness: 0.2,
-            render: {
-                visible: false
-            }
-        }
-    });
+	Render.run(render);
+	
+   Runner.run(Runner.create(), engine);
 
-    World.add(world, mouseConstraint);
+   // 添加鼠標控制
+   const mouse = Mouse.create(render.canvas);
+   const mouseConstraint = MouseConstraint.create(engine, {
+       mouse: mouse,
+       constraint: {
+           stiffness: 0.2,
+           render: {
+               visible: false
+           }
+       }
+   });
 
-    render.mouse = mouse;
+   World.add(world, mouseConstraint);
 
-    // 點擊縮小圖片並反彈
-    Events.on(mouseConstraint, 'mousedown', (event) => {
-        const bodies = Matter.Composite.allBodies(engine.world);
-        const mousePosition = event.mouse.position;
-        const clickedBodies = Matter.Query.point(bodies, mousePosition);
-        clickedBodies.forEach((body) => {
-            if (body.label === 'image') {
-                Matter.Body.scale(body, 0.5, 0.5);
-                Matter.Body.applyForce(body, { x: body.position.x, y: body.position.y }, { x: 0, y: -0.05 });
-            }
-        });
-    });
+   render.mouse = mouse;
 
-    // 監聽碰撞事件
-    Events.on(engine, 'collisionStart', (event) => {
-        const pairs = event.pairs;
-        pairs.forEach((pair) => {
-            if (pair.bodyA.label === 'image' && pair.bodyB === ground || pair.bodyA === ground && pair.bodyB.label === 'image') {
-                endGame(count, render, Runner);
-                playCollisionSound();
-            }
-        });
-    });
+   // 點擊縮小圖片並反彈
+   Events.on(mouseConstraint, 'mousedown', (event) => {
+       const bodies = Matter.Composite.allBodies(engine.world);
+       const mousePosition = event.mouse.position;
+       const clickedBodies = Matter.Query.point(bodies, mousePosition);
+       clickedBodies.forEach((body) => {
+           if (body.label === 'image') {
+               Matter.Body.scale(body, 0.5, 0.5);
+               Matter.Body.applyForce(body, { x: body.position.x, y: body.position.y }, { x: 0, y: -0.05 });
+           }
+       });
+   });
+
+   // 監聽碰撞事件
+   Events.on(engine, 'collisionStart', (event) => {
+       const pairs = event.pairs;
+       pairs.forEach((pair) => {
+           if ((pair.bodyA.label === 'image' && pair.bodyB === ground) || (pair.bodyA === ground && pair.bodyB.label === 'image')) {
+               count++; // 增加計數器
+               endGame(count, render);
+               playCollisionSound();
+           }
+       });
+   });
 }
 
 let count = 0;
 
-function endGame(count, render, runner) {
-    Matter.Render.stop(render);
-    Matter.Runner.stop(runner);
-
-    document.getElementById('canvas').style.display = 'none';
-    document.getElementById('count-display').innerText = `桐生: ${count}`;
-    document.getElementById('summary').style.display = 'block';
+function endGame(count, render) {
+   Matter.Render.stop(render);
+   
+   document.getElementById('canvas').style.display = 'none';
+   document.getElementById('count-display').innerText = `桐生: ${count}`;
+   document.getElementById('summary').style.display = 'block';
 }
 
 function playCollisionSound() {
-    const collisionSound = document.getElementById('collision-sound');
-    collisionSound.currentTime = 0;
-    collisionSound.play();
+   const collisionSound = document.getElementById('collision-sound');
+   collisionSound.currentTime = 0;
+   collisionSound.play();
 }
